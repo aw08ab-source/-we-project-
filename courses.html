@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>UniTrack - Courses</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="logo">
+            <img src="images/logo.png" alt="UniTrack Logo" width="100" height="50" />
+        </div>
+        <div id="nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="courses.html" class="active">Courses</a></li>
+                <li><a href="results.html">Results</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="main">
+        <h2>Course Catalog</h2>
+        <p>Browse all available courses for the current semester.</p>
+        
+        <table class="data-table">
+            <tr>
+                <th>Course Code</th>
+                <th>Course Name</th>
+                <th>Instructor</th>
+                <th>Credits</th>
+                <th>Schedule</th>
+                <th>Available Seats</th>
+            </tr>
+            <tr>
+                <td>COMP3700</td>
+                <td>Introduction to Web Computing</td>
+                <td>Dr. Ahmad Soleimani</td>
+                <td>3</td>
+                <td>Mon/Wed 10:00-11:30</td>
+                <td>25</td>
+            </tr>
+            <tr>
+                <td>MATH1010</td>
+                <td>Calculus I</td>
+                <td>Dr. Sebti Kerbal</td>
+                <td>4</td>
+                <td>Tue/Thu 9:00-10:30</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td>COMP3501</td>
+                <td>Computer organization and Assmebly language</td>
+                <td>Dr. Amjad Altobi</td>
+                <td>4</td>
+                <td>Mon/Wed/Fri 13:00-14:00</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>COMP2202</td>
+                <td>Introduction to object oriented programming</td>
+                <td>Dr. Donald Trump</td>
+                <td>3</td>
+                <td>Tue/Thu 11:00-12:30</td>
+                <td>35</td>
+            </tr>
+        </table>
+        
+        <h3>Course Registration</h3>
+        <p>To register for courses, please <a href="login.html">login to your student account</a>.</p>
+        
+        <form action="https://httpbin.org/get" method="get">
+            <div class="form-group">
+                <label for="search-course">Search Courses:</label>
+                <input type="text" id="search-course" name="search_course" />
+                <input type="submit" value="Search" class="button" />
+            </div>
+        </form>
+    </div>
+    
+    <div id="footer">
+        <p>&copy; 2025 UniTrack - Student Registrar System. COMP3700 Project.</p>
+    </div>
+</div>
+</body>
+</html>

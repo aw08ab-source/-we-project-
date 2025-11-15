@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>UniTrack - Results</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="logo">
+            <img src="images/logo.png" alt="UniTrack Logo" width="100" height="50" />
+        </div>
+        <div id="nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="results.html" class="active">Results</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="main">
+        <h2>Academic Results</h2>
+        <p>View your grades and academic performance.</p>
+        
+        <div class="notice">
+            <p><strong>Note:</strong> You need to <a href="login.html">login</a> to view your personal results.</p>
+        </div>
+        
+        <h3>Sample Student Record</h3>
+        <table class="data-table">
+            <tr>
+                <th>Course Code</th>
+                <th>Course Name</th>
+                <th>Credits</th>
+                <th>Grade</th>
+                <th>Grade Points</th>
+            </tr>
+            <tr>
+                <td>COMP3700</td>
+                <td>Introduction to Web Computing</td>
+                <td>3</td>
+                <td>A</td>
+                <td>4.0</td>
+            </tr>
+            <tr>
+                <td>MATH1010</td>
+                <td>Calculus I</td>
+                <td>4</td>
+                <td>B+</td>
+                <td>3.3</td>
+            </tr>
+            <tr>
+                <td>COMP2202</td>
+                <td>Introduction to object oriented programming</td>
+                <td>3</td>
+                <td>A-</td>
+                <td>3.7</td>
+            </tr>
+        </table>
+        
+        <table class="summary-table">
+            <tr>
+                <th>Total Credits</th>
+                <th>GPA</th>
+                <th>Academic Standing</th>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>3.63</td>
+                <td>Good Standing</td>
+            </tr>
+        </table>
+        
+        <h3>Grade Submission (Teachers Only)</h3>
+        <form action="https://httpbin.org/get" method="get">
+            <div class="form-group">
+                <label for="course-select">Select Course:</label>
+                <select id="course-select" name="course_select">
+                    <option value="comp3700">COMP3700 - Web Computing</option>
+                    <option value="math1010">MATH1010 - Calculus I</option>
+                    <option value="phys1500">PHYS1500 - General Physics</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="student-id">Student ID:</label>
+                <input type="text" id="student-id" name="student_id" />
+            </div>
+            
+            <div class="form-group">
+                <label for="grade">Grade:</label>
+                <select id="grade" name="grade">
+                    <option value="A">A</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B">B</option>
+                    <option value="B-">B-</option>
+                    <option value="C+">C+</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="F">F</option>
+                </select>
+            </div>
+            
+            <input type="submit" value="Submit Grade" class="button" />
+        </form>
+    </div>
+    
+    <div id="footer">
+        <p>&copy; 2025 UniTrack - Student Registrar System. COMP3700 Project.</p>
+    </div>
+</div>
+</body>
+</html>
