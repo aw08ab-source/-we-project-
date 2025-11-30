@@ -14,7 +14,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
     <div class="container">
         <a class="navbar-brand fw-bold" href="index.html">
-            <img src="logo.png" alt="UniTrack Logo" width="100" height="50">
+            <img src="images/logo.png" alt="UniTrack" width="100" height="50">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
             <span class="navbar-toggler-icon"></span>
@@ -22,68 +22,38 @@
 
         <div class="collapse navbar-collapse" id="navMenu">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-                <li class="nav-item"><a class="nav-link active" href="courses.html">Courses</a></li>
+                <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
                 <li class="nav-item"><a class="nav-link" href="results.html">Results</a></li>
+                <li class="nav-item"><a class="nav-link" href="timetable.html">Timetable</a></li>
                 <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="calculate.html">calculate</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
 <!-- MAIN CONTENT -->
-<div class="container my-5">
+<div class="container my-5" id="courses-page">
 
     <h2 class="mb-4">Course Catalog</h2>
     <p>Browse all available courses for the current semester.</p>
 
     <div class="table-responsive">
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered" id="course-table">
             <thead class="table-primary">
                 <tr>
                     <th>Course Code</th>
                     <th>Course Name</th>
                     <th>Instructor</th>
                     <th>Credits</th>
-                    <th>Schedule</th>
                     <th>Available Seats</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>COMP3700</td>
-                    <td>Introduction to Web Computing</td>
-                    <td>Dr. Ahmad Soleimani</td>
-                    <td>3</td>
-                    <td>Mon/Wed 10:00-11:30</td>
-                    <td>25</td>
-                </tr>
-                <tr>
-                    <td>MATH1010</td>
-                    <td>Calculus I</td>
-                    <td>Dr. Sebti Kerbal</td>
-                    <td>4</td>
-                    <td>Tue/Thu 9:00-10:30</td>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <td>COMP3501</td>
-                    <td>Computer organization and Assembly language</td>
-                    <td>Dr. Amjad Altobi</td>
-                    <td>4</td>
-                    <td>Mon/Wed/Fri 13:00-14:00</td>
-                    <td>20</td>
-                </tr>
-                <tr>
-                    <td>COMP2202</td>
-                    <td>Introduction to object oriented programming</td>
-                    <td>Dr. Donald Trump</td>
-                    <td>3</td>
-                    <td>Tue/Thu 11:00-12:30</td>
-                    <td>35</td>
-                </tr>
+            <tbody id="course-table-body">
+                <!-- Course rows will be dynamically populated here -->
             </tbody>
         </table>
     </div>
@@ -91,15 +61,26 @@
     <h3 class="mt-5">Course Registration</h3>
     <p>To register for courses, please <a href="login.html">login to your student account</a>.</p>
 
-    <form action="https://httpbin.org/get" method="get" class="row g-3 mt-3">
+    <form method="get" action="" class="row g-3 mt-3" id="search-course-form">
         <div class="col-md-8">
             <label for="search-course" class="form-label">Search Courses:</label>
-            <input type="text" id="search-course" name="search_course" class="form-control" />
+            <input type="text" id="search-course" name="search" placeholder="Search..." class="form-control" />
         </div>
-        <div class="col-md-4 d-flex align-items-end">
-            <input type="submit" value="Search" class="btn btn-primary w-100" />
+
+        <div class="col-md-4">
+            <label class="form-label d-block">&nbsp;</label>
+            <div class="row g-2">
+                <div class="col-6">
+                    <button type="submit" class="btn btn-primary w-100">Search</button>
+                </div>
+                <div class="col-6">
+                    <button type="button" class="btn btn-danger w-100" id="clear-search">Reset</button>
+                </div>
+            </div>
         </div>
     </form>
+
+
 
 </div>
 
@@ -108,7 +89,15 @@
     &copy; 2025 UniTrack - Student Registrar System. COMP3700 Project.
 </footer>
 
+<script>
+    document.getElementById("clear-search").addEventListener("click", () => {
+        document.getElementById("search-course").value = "";
+    });
+</script>
+
+
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
