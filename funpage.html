@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniTrack - Fun Quiz</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">
+            <img src="logo.png" alt="UniTrack Logo" width="100" height="50">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="results.html">Results</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item"><a class="nav-link active" href="fun.html">Fun Quiz</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="container my-5">
+    <h2 class="mb-4">Fun General Knowledge Quiz</h2>
+    <p class="mb-4">Test your knowledge! Choose the correct answers and see your score.</p>
+
+    <!-- QUIZ CARD -->
+    <div class="card shadow-sm p-4">
+        
+        <form id="quizForm">
+
+            <!-- Question 1 -->
+            <div class="mb-4">
+                <h5>1. What is the capital of France?</h5>
+                <div class="form-check">
+                    <input type="radio" name="q1" value="Paris" class="form-check-input">
+                    <label class="form-check-label">Paris</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="q1" value="London" class="form-check-input">
+                    <label class="form-check-label">London</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="q1" value="Rome" class="form-check-input">
+                    <label class="form-check-label">Rome</label>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="mb-4">
+                <h5>2. Who painted the Mona Lisa?</h5>
+                <div class="form-check">
+                    <input type="radio" name="q2" value="Da Vinci" class="form-check-input">
+                    <label class="form-check-label">Leonardo da Vinci</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="q2" value="Van Gogh" class="form-check-input">
+                    <label class="form-check-label">Vincent van Gogh</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="q2" value="Picasso" class="form-check-input">
+                    <label class="form-check-label">Pablo Picasso</label>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="mb-4">
+                <h5>3. Which planet is known as the Red Planet?</h5>
+                <div class="form-check">
+                    <input type="radio" name="q3" value="Mars" class="form-check-input">
+                    <label class="form-check-label">Mars</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="q3" value="Jupiter" class="form-check-input">
+                    <label class="form-check-label">Jupiter</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="q3" value="Saturn" class="form-check-input">
+                    <label class="form-check-label">Saturn</label>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="mb-4">
+                <h5>4. What is the largest ocean on Earth?</h5>
+                <div class="form-check">
+                    <input type="radio" name="q4" value="Pacific" class="form-check-input">
+                    <label class="form-check-label">Pacific Ocean</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="q4" value="Atlantic" class="form-check-input">
+                    <label class="form-check-label">Atlantic Ocean</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="q4" value="Indian" class="form-check-input">
+                    <label class="form-check-label">Indian Ocean</label>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="mb-4">
+                <h5>5. How many continents are there?</h5>
+                <div class="form-check">
+                    <input type="radio" name="q5" value="7" class="form-check-input">
+                    <label class="form-check-label">7</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="q5" value="5" class="form-check-input">
+                    <label class="form-check-label">5</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="q5" value="6" class="form-check-input">
+                    <label class="form-check-label">6</label>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="calculateScore()">Submit Answers</button>
+
+        </form>
+
+        <div id="result" class="alert alert-info mt-4 d-none"></div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="text-center py-3 mt-5 bg-light border-top">
+    &copy; 2025 UniTrack - Student Registrar System. COMP3700 Project.
+</footer>
+
+<!-- JavaScript -->
+<script>
+function calculateScore() {
+    let correct = 0;
+
+    if (document.querySelector('input[name="q1"]:checked')?.value === "Paris") correct++;
+    if (document.querySelector('input[name="q2"]:checked')?.value === "Da Vinci") correct++;
+    if (document.querySelector('input[name="q3"]:checked')?.value === "Mars") correct++;
+    if (document.querySelector('input[name="q4"]:checked')?.value === "Pacific") correct++;
+    if (document.querySelector('input[name="q5"]:checked')?.value === "7") correct++;
+
+    const resultBox = document.getElementById("result");
+    resultBox.classList.remove("d-none");
+
+    resultBox.innerHTML = `<strong>Your Score:</strong> ${correct} / 5`;
+}
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
