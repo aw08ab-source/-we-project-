@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniTrack - GPA Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4e73df;
+            --success: #1cc88a;
+            --info: #36b9cc;
+            --warning: #f6c23e;
+            --danger: #e74a3b;
+            --dark: #5a5c69;
+        }
+        
+        body {
+            background-color: #f8f9fc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 0.75rem;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+        }
+        
+        .card-header {
+            background-color: var(--primary);
+            color: white;
+            border-radius: 0.75rem 0.75rem 0 0 !important;
+            font-weight: 600;
+        }
+        
+        .course-row {
+            transition: all 0.3s;
+        }
+        
+        .course-row:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .gpa-display {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .gpa-card {
+            border-left: 4px solid var(--primary);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            border-color: var(--success);
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            border-color: var(--danger);
+        }
+        
+        .grade-point {
+            font-weight: 600;
+        }
+        
+        .result-card {
+            transition: all 0.5s ease;
+        }
+        
+        footer {
+            margin-top: 3rem;
+        }
+        
+        .table th {
+            border-top: none;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .instruction-card {
+            border-left: 4px solid var(--info);
+        }
+        
+        .course-number {
+            color: var(--dark);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="images/logo.png" alt="UniTrack" width="100" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="results.html">Results</a></li>
+                    <li class="nav-item"><a class="nav-link" href="timetable.html">Timetable</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="calculate.html">calculate</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card mb-4">
+                    <div class="card-header py-3">
+                        <h4 class="mb-0"><i class="fas fa-calculator me-2"></i>GPA Calculator</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <div class="card instruction-card">
+                                    <div class="card-body">
+                                        <h5><i class="fas fa-info-circle me-2 text-info"></i>How to Use</h5>
+                                        <p class="mb-0">Add your courses with their credit hours and grades. The calculator will automatically compute your GPA based on the standard 4.0 scale.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <form id="gpa-form">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="courses-table">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th width="10%">#</th>
+                                            <th width="30%">Credits</th>
+                                            <th width="30%">Grade</th>
+                                            <th width="25%">Grade Points</th>
+                                            <th width="5%"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="courses-tbody">
+                                        <!-- Course rows will be added here dynamically -->
+                                        <tr class="course-row">
+                                            <td class="course-number">1</td>
+                                            <td>
+                                                <input type="number" class="form-control credits" min="1" max="10" step="0.5" value="3" required>
+                                            </td>
+                                            <td>
+                                                <select class="form-select grade" required>
+                                                    <option value="4.0">A</option>
+                                                    <option value="3.7">A-</option>
+                                                    <option value="3.3">B+</option>
+                                                    <option value="3.0" selected>B</option>
+                                                    <option value="2.7">B-</option>
+                                                    <option value="2.3">C+</option>
+                                                    <option value="2.0">C</option>
+                                                    <option value="1.7">C-</option>
+                                                    <option value="1.3">D+</option>
+                                                    <option value="1.0">D</option>
+                                                    <option value="0.0">F</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <span class="grade-point">12.0</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-danger remove-course" disabled>
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" class="text-center">
+                                                <button type="button" id="add-course" class="btn btn-success">
+                                                    <i class="fas fa-plus me-2"></i>Add Another Course
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                <button type="button" id="reset-form" class="btn btn-outline-secondary me-md-2">
+                                    <i class="fas fa-redo me-2"></i>Reset
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-calculator me-2"></i>Calculate GPA
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- RESULTS CARD -->
+                <div class="card result-card mb-4 d-none" id="results-card">
+                    <div class="card-header py-3 bg-success text-white">
+                        <h4 class="mb-0"><i class="fas fa-chart-line me-2"></i>GPA Results</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-md-4 mb-3">
+                                <div class="card gpa-card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Total Credits</h5>
+                                        <div class="display-4 fw-bold text-primary" id="total-credits">0</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card gpa-card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Total Grade Points</h5>
+                                        <div class="display-4 fw-bold text-primary" id="total-grade-points">0</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card gpa-card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Your GPA</h5>
+                                        <div class="gpa-display" id="gpa-result">0.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h5 class="mb-3">Academic Standing</h5>
+                                <div class="alert" id="academic-standing">
+                                    <!-- Academic standing will be displayed here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- GRADE SCALE REFERENCE -->
+                <div class="card">
+                    <div class="card-header py-3">
+                        <h4 class="mb-0"><i class="fas fa-list-alt me-2"></i>Grade Scale Reference</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Grade</th>
+                                        <th>Grade Points</th>
+                                        <th>Percentage Range</th>
+                                        <th>Performance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>A</td>
+                                        <td>4.0</td>
+                                        <td>93-100%</td>
+                                        <td><span class="badge bg-success">Excellent</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>A-</td>
+                                        <td>3.7</td>
+                                        <td>90-92%</td>
+                                        <td><span class="badge bg-success">Excellent</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>B+</td>
+                                        <td>3.3</td>
+                                        <td>87-89%</td>
+                                        <td><span class="badge bg-info">Good</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>B</td>
+                                        <td>3.0</td>
+                                        <td>83-86%</td>
+                                        <td><span class="badge bg-info">Good</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-</td>
+                                        <td>2.7</td>
+                                        <td>80-82%</td>
+                                        <td><span class="badge bg-info">Good</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>C+</td>
+                                        <td>2.3</td>
+                                        <td>77-79%</td>
+                                        <td><span class="badge bg-warning">Satisfactory</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>C</td>
+                                        <td>2.0</td>
+                                        <td>73-76%</td>
+                                        <td><span class="badge bg-warning">Satisfactory</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>C-</td>
+                                        <td>1.7</td>
+                                        <td>70-72%</td>
+                                        <td><span class="badge bg-warning">Satisfactory</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D+</td>
+                                        <td>1.3</td>
+                                        <td>67-69%</td>
+                                        <td><span class="badge bg-danger">Poor</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D</td>
+                                        <td>1.0</td>
+                                        <td>60-66%</td>
+                                        <td><span class="badge bg-danger">Poor</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>F</td>
+                                        <td>0.0</td>
+                                        <td>Below 60%</td>
+                                        <td><span class="badge bg-danger">Fail</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-4 bg-light border-top">
+        <div class="container">
+            <p class="mb-0">&copy; 2025 UniTrack - Student Registrar System. COMP3700 Project.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const coursesTable = document.getElementById('courses-tbody');
+            const addCourseBtn = document.getElementById('add-course');
+            const resetBtn = document.getElementById('reset-form');
+            const gpaForm = document.getElementById('gpa-form');
+            const resultsCard = document.getElementById('results-card');
+            
+            // Initialize with one course row
+            updateGradePoints();
+            updateRemoveButtons();
+            updateCourseNumbers();
+            
+            // Add new course row
+            addCourseBtn.addEventListener('click', function() {
+                const newRow = document.createElement('tr');
+                newRow.className = 'course-row';
+                newRow.innerHTML = `
+                    <td class="course-number">${coursesTable.children.length + 1}</td>
+                    <td>
+                        <input type="number" class="form-control credits" min="1" max="10" step="0.5" value="3" required>
+                    </td>
+                    <td>
+                        <select class="form-select grade" required>
+                            <option value="4.0">A</option>
+                            <option value="3.7">A-</option>
+                            <option value="3.3">B+</option>
+                            <option value="3.0" selected>B</option>
+                            <option value="2.7">B-</option>
+                            <option value="2.3">C+</option>
+                            <option value="2.0">C</option>
+                            <option value="1.7">C-</option>
+                            <option value="1.3">D+</option>
+                            <option value="1.0">D</option>
+                            <option value="0.0">F</option>
+                        </select>
+                    </td>
+                    <td>
+                        <span class="grade-point">12.0</span>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-danger remove-course">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </td>
+                `;
+                coursesTable.appendChild(newRow);
+                
+                // Add event listeners to new row
+                addRowEventListeners(newRow);
+                updateRemoveButtons();
+                updateCourseNumbers();
+            });
+            
+            // Reset form
+            resetBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to reset the form? All data will be lost.')) {
+                    // Remove all rows except the first one
+                    while (coursesTable.children.length > 1) {
+                        coursesTable.removeChild(coursesTable.lastChild);
+                    }
+                    
+                    // Reset the first row
+                    const firstRow = coursesTable.children[0];
+                    firstRow.querySelector('.credits').value = '3';
+                    firstRow.querySelector('.grade').value = '3.0';
+                    
+                    // Update grade points and remove buttons
+                    updateGradePoints();
+                    updateRemoveButtons();
+                    updateCourseNumbers();
+                    
+                    // Hide results
+                    resultsCard.classList.add('d-none');
+                }
+            });
+            
+            // Calculate GPA
+            gpaForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                calculateGPA();
+            });
+            
+            // Add event listeners to existing rows
+            document.querySelectorAll('.course-row').forEach(row => {
+                addRowEventListeners(row);
+            });
+            
+            // Function to add event listeners to a row
+            function addRowEventListeners(row) {
+                const creditsInput = row.querySelector('.credits');
+                const gradeSelect = row.querySelector('.grade');
+                const removeBtn = row.querySelector('.remove-course');
+                
+                // Update grade points when credits or grade changes
+                creditsInput.addEventListener('input', updateGradePoints);
+                gradeSelect.addEventListener('change', updateGradePoints);
+                
+                // Remove course row
+                removeBtn.addEventListener('click', function() {
+                    if (coursesTable.children.length > 1) {
+                        row.remove();
+                        updateRemoveButtons();
+                        updateCourseNumbers();
+                    }
+                });
+            }
+            
+            // Update grade points for each row
+            function updateGradePoints() {
+                document.querySelectorAll('.course-row').forEach(row => {
+                    const credits = parseFloat(row.querySelector('.credits').value) || 0;
+                    const gradeValue = parseFloat(row.querySelector('.grade').value) || 0;
+                    const gradePoints = credits * gradeValue;
+                    
+                    row.querySelector('.grade-point').textContent = gradePoints.toFixed(1);
+                });
+            }
+            
+            // Update remove buttons (disable if only one row)
+            function updateRemoveButtons() {
+                const removeButtons = document.querySelectorAll('.remove-course');
+                if (coursesTable.children.length === 1) {
+                    removeButtons[0].disabled = true;
+                } else {
+                    removeButtons.forEach(btn => btn.disabled = false);
+                }
+            }
+            
+            // Update course numbers
+            function updateCourseNumbers() {
+                document.querySelectorAll('.course-row').forEach((row, index) => {
+                    row.querySelector('.course-number').textContent = index + 1;
+                });
+            }
+            
+            // Calculate GPA function
+            function calculateGPA() {
+                let totalCredits = 0;
+                let totalGradePoints = 0;
+                
+                document.querySelectorAll('.course-row').forEach(row => {
+                    const credits = parseFloat(row.querySelector('.credits').value) || 0;
+                    const gradeValue = parseFloat(row.querySelector('.grade').value) || 0;
+                    
+                    totalCredits += credits;
+                    totalGradePoints += credits * gradeValue;
+                });
+                
+                const gpa = totalCredits > 0 ? (totalGradePoints / totalCredits).toFixed(2) : 0;
+                
+                // Update results
+                document.getElementById('total-credits').textContent = totalCredits;
+                document.getElementById('total-grade-points').textContent = totalGradePoints.toFixed(1);
+                document.getElementById('gpa-result').textContent = gpa;
+                
+                // Determine academic standing
+                const academicStanding = document.getElementById('academic-standing');
+                academicStanding.className = 'alert';
+                
+                if (gpa >= 3.7) {
+                    academicStanding.classList.add('alert-success');
+                    academicStanding.innerHTML = '<strong>Summa Cum Laude:</strong> Excellent academic performance!';
+                } else if (gpa >= 3.3) {
+                    academicStanding.classList.add('alert-info');
+                    academicStanding.innerHTML = '<strong>Magna Cum Laude:</strong> Very good academic performance.';
+                } else if (gpa >= 3.0) {
+                    academicStanding.classList.add('alert-info');
+                    academicStanding.innerHTML = '<strong>Cum Laude:</strong> Good academic performance.';
+                } else if (gpa >= 2.0) {
+                    academicStanding.classList.add('alert-warning');
+                    academicStanding.innerHTML = '<strong>Good Standing:</strong> Satisfactory academic performance.';
+                } else {
+                    academicStanding.classList.add('alert-danger');
+                    academicStanding.innerHTML = '<strong>Academic Probation:</strong> Below minimum requirements. Please meet with your advisor.';
+                }
+                
+                // Show results card with animation
+                resultsCard.classList.remove('d-none');
+                resultsCard.style.opacity = '0';
+                resultsCard.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    resultsCard.style.transition = 'all 0.5s ease';
+                    resultsCard.style.opacity = '1';
+                    resultsCard.style.transform = 'translateY(0)';
+                }, 100);
+            }
+        });
+    </script>
+</body>
+</html>
