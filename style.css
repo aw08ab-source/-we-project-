@@ -2,6 +2,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -11,68 +12,34 @@ body {
     background-color: #f4f4f4;
 }
 
+/* Container */
 #container {
-    width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    background: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* Header Styles */
+/* Header */
 #header {
     background: #2c3e50;
     color: white;
-    padding: 20px;
-    overflow: hidden;
+    padding: 15px 0;
     border-bottom: 5px solid #3498db;
 }
 
-.logo {
-    float: left;
-}
-
-.logo img {
+/* Navbar overrides */
+.navbar-brand img {
     vertical-align: middle;
-    margin-right: 15px;
 }
 
-.logo h1 {
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 24px;
+.navbar-nav .nav-link.active {
+    background-color: #3498db !important;
+    color: white !important;
+    border-radius: 5px;
 }
 
-/* Navigation Styles */
-#nav {
-    float: right;
-    margin-top: 10px;
-}
-
-#nav ul {
-    list-style: none;
-}
-
-#nav ul li {
-    display: inline-block;
-    margin-left: 20px;
-}
-
-#nav ul li a {
-    color: white;
-    text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 3px;
-}
-
-#nav ul li a:hover, #nav ul li a.active {
-    background-color: #3498db;
-}
-
-/* Main Content Styles */
+/* Main Content */
 #main {
-    padding: 30px;
-    min-height: 500px;
+    padding: 30px 15px;
 }
 
 #main h2 {
@@ -84,7 +51,7 @@ body {
 
 #main h3 {
     color: #2c3e50;
-    margin: 25px 0 15px 0;
+    margin: 25px 0 15px;
 }
 
 /* Feature Boxes */
@@ -96,14 +63,8 @@ body {
     border-radius: 5px;
 }
 
-.feature-box h3 {
-    margin-top: 0;
-    color: #2c3e50;
-}
-
-/* Button Styles */
-.button {
-    display: inline-block;
+/* Buttons */
+.button, .btn-custom {
     background: #3498db;
     color: white;
     padding: 10px 20px;
@@ -114,18 +75,16 @@ body {
     font-size: 16px;
 }
 
-.button:hover {
+.button:hover, .btn-custom:hover {
     background: #2980b9;
 }
 
-/* Form Styles */
+/* Forms */
 .form-group {
     margin-bottom: 20px;
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 5px;
     font-weight: bold;
     color: #2c3e50;
 }
@@ -142,16 +101,7 @@ body {
     font-size: 16px;
 }
 
-.form-group input[type="radio"],
-.form-group input[type="checkbox"] {
-    margin-right: 5px;
-}
-
-.form-group div {
-    margin-top: 5px;
-}
-
-/* Table Styles */
+/* Tables */
 .data-table, .summary-table {
     width: 100%;
     border-collapse: collapse;
@@ -183,8 +133,8 @@ body {
     background-color: #2c3e50;
 }
 
-/* Notice Box */
-.notice {
+/* Notice / Alert */
+.notice, .alert-custom {
     background: #fff3cd;
     border: 1px solid #ffeaa7;
     padding: 15px;
@@ -192,11 +142,7 @@ body {
     margin: 20px 0;
 }
 
-.notice p {
-    margin: 0;
-}
-
-/* Footer Styles */
+/* Footer */
 #footer {
     background: #2c3e50;
     color: white;
@@ -205,7 +151,7 @@ body {
     margin-top: 30px;
 }
 
-/* Link Styles */
+/* Links */
 a {
     color: #3498db;
     text-decoration: none;
@@ -215,7 +161,7 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Inline CSS Example */
+/* Intro paragraph */
 p.intro {
     font-style: italic;
     color: #7f8c8d;
