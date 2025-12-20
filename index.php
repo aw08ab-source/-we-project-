@@ -97,6 +97,10 @@
 
 <body>
 
+<?php
+    require_once 'config.php'; // This will auto-setup database
+?>
+
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
     <div class="container">
@@ -109,12 +113,12 @@
 
         <div class="collapse navbar-collapse" id="navMenu">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
-                <li class="nav-item"><a class="nav-link" href="results.html">Results</a></li>
-                <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="courses.php">Courses</a></li>
+                <li class="nav-item"><a class="nav-link" href="results.php">Results</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="calculate.html">Calculate GPA</a></li>
                 <li class="nav-item"><a class="nav-link" href="Questionnaire.html">Questionnaire</a></li>
                 <li class="nav-item"><a class="nav-link" href="funpage.html">Fun Page</a></li>
