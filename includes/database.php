@@ -1,15 +1,16 @@
 <?php
-// includes/database.php
+// database.php - Your existing connection file should look similar to this
 $host = 'localhost';
-$username = 'root';
-$password = '';
 $dbname = 'university_system';
+$username = 'root';
+$password = ''; // Default for XAMPP
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", 
-                   $username, $password);
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
+    // Optionally set PDO to use emulated prepares (off is more secure for some cases)
+    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+} catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
 ?>

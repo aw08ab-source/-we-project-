@@ -13,31 +13,7 @@
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="index.html">
-            <img src="images/logo.png" alt="UniTrack" width="100" height="50">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navMenu">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="courses.php">Courses</a></li>
-                <li class="nav-item"><a class="nav-link" href="results.php">Results</a></li>
-                <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-                <li class="nav-item"><a class="nav-link" href="calculate.html">Calculate GPA</a></li>
-                <li class="nav-item"><a class="nav-link active" href="Questionnaire.html">Questionnaire</a></li>
-                <li class="nav-item"><a class="nav-link" href="funpage.html">Fun Page</a></li>
-
-            </ul>
-        </div>
-    </div>
-</nav>
+<?php include 'includes/navbar.php'; ?>
 
 <!-- MAIN CONTENT -->
 <div class="container my-5">

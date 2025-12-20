@@ -1,3 +1,39 @@
+<?php
+// Start the session and include necessary files
+require_once 'includes/session.php';
+require_once 'includes/database.php';
+require_once 'includes/auth.php';
+
+// Initialize error message
+$login_error = '';
+
+// Check if the form was submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get and sanitize user input
+    $identifier = trim($_POST['user_id'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $role = $_POST['role'] ?? 'student'; // Your form has a role selector
+
+    // Call the authentication function
+    $user = authenticateUser($identifier, $password, $role);
+
+    if ($user) {
+        // Login successful: Set session variables
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_name'] = $user['name'];
+        $_SESSION['user_role'] = $user['role'];
+        $_SESSION['loggedin'] = true;
+
+        // Redirect to the dashboard (or another page)
+        header("Location: dashboard.php");
+        exit();
+    } else {
+        // Login failed: Set error message
+        $login_error = "Invalid ID, password, or role selected. Please try again.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,40 +47,16 @@
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="index.html">
-            <img src="images/logo.png" alt="UniTrack" width="100" height="50">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navMenu">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="courses.php">Courses</a></li>
-                <li class="nav-item"><a class="nav-link" href="results.php">Results</a></li>
-                <li class="nav-item"><a class="nav-link active" href="login.php">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-                <li class="nav-item"><a class="nav-link" href="calculate.html">Calculate GPA</a></li>
-                <li class="nav-item"><a class="nav-link" href="Questionnaire.html">Questionnaire</a></li>
-                <li class="nav-item"><a class="nav-link" href="funpage.html">Fun Page</a></li>
-
-            </ul>
-        </div>
-    </div>
-</nav>
+<?php include 'includes/navbar.php'; ?>
 
 <!-- MAIN CONTENT -->
 <div class="container my-5">
     <h2 class="mb-4">Login to UniTrack</h2>
+    <?php if (!empty($login_error)): ?>
+        <div class="alert alert-danger"><?php echo $login_error; ?></div>
+    <?php endif; ?>
 
-    <form action="https://httpbin.org/get" 
-          method="get" 
-          onsubmit="validateLogin(event)"
-          class="row g-3">
+    <form action="login.php" method="post" class="row g-3">
 
         <div class="col-md-6">
             <label for="user-id" class="form-label">User ID:</label>
