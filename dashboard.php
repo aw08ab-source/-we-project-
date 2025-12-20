@@ -25,7 +25,7 @@ if (!isLoggedIn()) {
         <?php if ($_SESSION['user_role'] == 'student'): ?>
             <p>Access your <a href="results.php">results</a> and <a href="courses.php">courses</a>.</p>
         <?php elseif ($_SESSION['user_role'] == 'admin'): ?>
-            <p>Go to the <a href="admin.php">admin panel</a> to manage users and courses.</p>
+            <p>Go to the <a href="web_project_squ\admin\index.php">admin panel</a> to manage users and courses.</p>
         <?php endif; ?>
     </div>
 </body>
