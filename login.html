@@ -41,16 +41,21 @@
 <div class="container my-5">
     <h2 class="mb-4">Login to UniTrack</h2>
 
-    <form action="https://httpbin.org/get" method="get" class="row g-3">
+    <form action="https://httpbin.org/get" 
+          method="get" 
+          onsubmit="validateLogin(event)"
+          class="row g-3">
 
         <div class="col-md-6">
             <label for="user-id" class="form-label">User ID:</label>
-            <input type="text" id="user-id" name="user_id" class="form-control" />
+            <input type="text" id="user-id" name="user_id" class="form-control">
+            <span id="idError" class="text-danger"></span>
         </div>
 
         <div class="col-md-6">
             <label for="password" class="form-label">Password:</label>
-            <input type="password" id="password" name="password" class="form-control" />
+            <input type="password" id="password" name="password" class="form-control">
+            <span id="passwordError" class="text-danger"></span>
         </div>
 
         <div class="col-md-6">
@@ -63,12 +68,12 @@
         </div>
 
         <div class="col-md-6 form-check mt-4">
-            <input type="checkbox" id="remember" name="remember" value="yes" class="form-check-input" />
+            <input type="checkbox" id="remember" name="remember" value="yes" class="form-check-input">
             <label for="remember" class="form-check-label">Remember me</label>
         </div>
 
         <div class="col-12">
-            <input type="submit" value="Login" class="btn btn-primary" />
+            <input type="submit" value="Login" class="btn btn-primary">
         </div>
     </form>
 
@@ -85,7 +90,45 @@
     &copy; 2025 UniTrack - Student Registrar System. COMP3700 Project.
 </footer>
 
+<script>
+function validateLogin(event) {
+    let valid = true;
+
+    document.getElementById("idError").innerHTML = "";
+    document.getElementById("passwordError").innerHTML = "";
+
+    let id = document.getElementById("user-id").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    // User ID validation – numbers only
+    let idPattern = /^[0-9]+$/;
+    if (id === "") {
+        document.getElementById("idError").innerHTML = "User ID is required";
+        valid = false;
+    } 
+    else if (!idPattern.test(id)) {
+        document.getElementById("idError").innerHTML = "User ID must contain only numbers";
+        valid = false;
+    }
+
+    // password validation
+    if (password === "") {
+        document.getElementById("passwordError").innerHTML = "Password is required";
+        valid = false;
+    }
+    else if (password.length < 6) {
+        document.getElementById("passwordError").innerHTML = "Password must be at least 6 characters long";
+        valid = false;
+    }
+
+    if (!valid) {
+        event.preventDefault();
+    }
+}
+</script>
+
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
